@@ -14,27 +14,22 @@ W2 = cbind(w2_train, class = rep(2, nrow(w2_train)))
 W3 = cbind(w3_train, class = rep(3, nrow(w3_train)))
 training_set = rbind(W1, W2, W3)
 
+# Create a new test_set for LDA and QDA
+W1 = cbind(w1_test, class = rep(1, nrow(w1_test)))
+W2 = cbind(w2_test, class = rep(2, nrow(w2_test)))
+W3 = cbind(w3_test, class = rep(3, nrow(w3_test)))
+test_set = rbind(W1, W2, W3)
+
 # Classify using a LDA with equal priors
-lfit = lda(class ~ ., data = training_set, prior = c(1/3, 1/3, 1/3))
+fit = lda(class ~ ., data = training_set, prior = c(1, 1, 1)/3)
+# fit = qda(class ~ ., data = training_set, prior = c(1/3, 1/3, 1/3))
 
 # Compute the accuracy on the test set
 count = 0
-for (i in 1:nrow(w1_test)) {
-	if (predict(lfit, w1_test[i, ])$class == 1) {
-    count = count + 1
+for (i in 1:nrow(test_set)) {
+	if (predict(lfit, test_set[i, -22])$class == test_set[i, 22]) {
+		count = count + 1
 	}
 }
 
-for (i in 1:nrow(w2_test)) {
-  if (predict(lfit, w2_test[i, ])$class == 2) {
-    count = count + 1
-  }
-}
-
-for (i in 1:nrow(w3_test)) {
-  if (predict(lfit, w3_test[i, ])$class == 3) {
-    count = count + 1
-  }
-}
-
-lrate = count / (nrow(w1_test) + nrow(w2_test) + nrow(w3_test))
+rate = count / nrow(test_set)
