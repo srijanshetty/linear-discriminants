@@ -4,7 +4,7 @@ setwd(".")
 set.seed(111)
 
 # Number of samples
-sample_size = 15000
+sample_size = 1500
 train_size = 0.8
 validation_size = 0.1
 test_size = 0.1
