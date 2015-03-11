@@ -24,11 +24,11 @@ test_set = data[-(1:training_size), ]
 library(MASS)
 
 # Classify using a LDA with equal priors
-fit = lda(X22 ~ ., data = training_set, prior = c(1, 1, 1)/3)
-plot(fit)
+# fit = lda(X22 ~ ., data = training_set, prior = c(1, 1, 1)/3)
+# plot(fit)
 
 # QDA with equal priors
-# fit = qda(class ~ ., data = new_training_set, prior = c(1/3, 1/3, 1/3))
+fit = qda(X22 ~ ., data = training_set, prior = c(1, 1, 1)/3)
 
 # Compute the accuracy on the test set
 count = 0
