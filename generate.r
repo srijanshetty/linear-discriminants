@@ -5,9 +5,9 @@ set.seed(111)
 
 # Number of samples
 sample_size = 1500
-train_size = 0.8
-validation_size = 0.1
-test_size = 0.1
+training_size = 0.8 * sample_size
+validation_size = 0.1 * sample_size
+test_size = 0.1 * sample_size
 
 ###################################################################
 # To generate the waveform data we use mlbench
